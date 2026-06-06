@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaultKey - Password Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <nav class="nav">
+      <a class="brand" href="#" aria-label="VaultKey home">
+        <img class="brand-logo" src="assets/vaultkey-logo.png" alt="">
+      </a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
+        <span class="theme-icon" aria-hidden="true">Dark</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="intro" aria-labelledby="introTitle">
+      <div>
+        <p class="eyebrow">Local password vault</p>
+        <h1 id="introTitle">Manage your passwords in one clean, private place.</h1>
+        <p class="intro-copy">
+          VaultKey stores entries in your browser Local Storage so your data stays on this device.
+        </p>
+      </div>
+      <div class="stats-grid" aria-label="Vault statistics">
+        <div class="stat-card">
+          <span class="stat-number" id="totalCount">0</span>
+          <span class="stat-label">Saved</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="visibleCount">0</span>
+          <span class="stat-label">Visible</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <form class="panel form-panel" id="passwordForm" autocomplete="off">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Entry</p>
+            <h2 id="formTitle">Add password</h2>
+          </div>
+          <button class="ghost-button hidden" id="cancelEditBtn" type="button">Cancel edit</button>
+        </div>
+
+        <input type="hidden" id="entryId">
+
+        <label class="field">
+          <span>Website or app</span>
+          <input id="siteInput" type="text" placeholder="github.com" required>
+        </label>
+
+        <label class="field">
+          <span>Username or email</span>
+          <input id="usernameInput" type="text" placeholder="name@example.com" required>
+        </label>
+
+        <label class="field">
+          <span>Password</span>
+          <div class="password-row">
+            <input id="passwordInput" type="text" placeholder="Create or paste a password" required>
+            <button class="icon-button" id="copyGeneratedBtn" type="button" title="Copy password" aria-label="Copy password">Copy</button>
+          </div>
+        </label>
+
+        <div class="generator">
+          <div class="generator-top">
+            <label class="length-control" for="lengthInput">
+              <span>Password length</span>
+              <strong id="lengthValue">16</strong>
+            </label>
+            <input id="lengthInput" type="range" min="8" max="32" value="16">
+          </div>
+
+          <div class="option-grid" aria-label="Password generator options">
+            <label class="check-option">
+              <input id="uppercaseOption" type="checkbox" checked>
+              <span>Uppercase</span>
+            </label>
+            <label class="check-option">
+              <input id="numbersOption" type="checkbox" checked>
+              <span>Numbers</span>
+            </label>
+            <label class="check-option">
+              <input id="symbolsOption" type="checkbox" checked>
+              <span>Symbols</span>
+            </label>
+          </div>
+
+          <button class="secondary-button" id="generateBtn" type="button">Generate password</button>
+        </div>
+
+        <button class="primary-button" id="submitBtn" type="submit">Add password</button>
+      </form>
+
+      <section class="panel vault-panel" aria-labelledby="vaultTitle">
+        <div class="panel-heading vault-heading">
+          <div>
+            <p class="eyebrow">Vault</p>
+            <h2 id="vaultTitle">Saved passwords</h2>
+          </div>
+          <label class="search-box" for="searchInput">
+            <span class="sr-only">Search passwords</span>
+            <input id="searchInput" type="search" placeholder="Search by website or username">
+          </label>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Website</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="passwordTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          <h3>No passwords yet</h3>
+          <p>Add your first VaultKey entry to see it here.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
